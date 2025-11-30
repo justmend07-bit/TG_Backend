@@ -121,7 +121,9 @@ async def send_booking_email(data, image_path: str | None = None):
     except Exception as e:
         raise Exception(f"Email sending failed: {str(e)}")
 
-   
+# =====================================================================
+# 2️⃣ SEND INVOICE EMAIL TO USER
+# =====================================================================
 
 
 async def send_email_with_invoice(data, invoice_path):
