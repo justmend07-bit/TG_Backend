@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     supabase_bucket: str
     supabase_url: str
     supabase_key: str
+    base_url:str
     
 
     class Config:
