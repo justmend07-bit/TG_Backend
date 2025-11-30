@@ -16,6 +16,7 @@ conf = ConnectionConfig(
 )
 
 resend.api_key = settings.resend_api_key
+base_url = settings.base_url
 
 # async def send_booking_email(data, image_path: str | None = None):
 #     """Send booking details via Resend API with optional image attachment."""
@@ -67,7 +68,7 @@ resend.api_key = settings.resend_api_key
 #         raise Exception(f"Email sending failed: {str(e)}")
 
 async def send_booking_email(data, image_path: str | None = None):
-    admin_action_base = "/odt/confirm"  # Base URL for admin actions
+    admin_action_base = f"{base_url}/odt/confirm"  # Base URL for admin actions
 
     button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
     button_939 = f"{admin_action_base}?booking_id={data.id}&amount=939"
