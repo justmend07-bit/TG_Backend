@@ -185,7 +185,7 @@ async def send_email_with_invoice(data, invoice_path):
 Great news — your booking for the 1Day Mrignnath Trek with TirthGhumo 
 is confirmed for 7th December 2025!
 
-Your payment has been approved successfully on {dateTime}.
+Your payment has been approved successfully . 
 
 All essential trip details, including timings and instructions, 
 will be shared shortly on WhatsApp.
