@@ -21,6 +21,7 @@ base_url = settings.base_url
 
 
 async def send_booking_email(data, image_path: str | None = None):
+try:
     admin_action_base = "https://tgbackend-production-62ff.up.railway.app/odt/confirm"  # Base URL for admin actions
     print(admin_action_base)
     button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
@@ -69,10 +70,12 @@ async def send_booking_email(data, image_path: str | None = None):
         email["attachments"] = attachments
 
    
-        resend.Emails.send(email)
-        
-    # except Exception as e:
-    #     raise Exception(f"Email sending failed: {str(e)}")
+    response = await resend.Emails.send(email_payload)
+        print("EMAIL SENT SUCCESSFULLY:", response)
+
+except Exception as e:
+        print("EMAIL ERROR:", e)
+        raise
 
 
 
