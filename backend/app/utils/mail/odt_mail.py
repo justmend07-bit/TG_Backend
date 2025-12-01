@@ -18,58 +18,11 @@ conf = ConnectionConfig(
 resend.api_key = settings.resend_api_key
 base_url = settings.base_url
 
-# async def send_booking_email(data, image_path: str | None = None):
-#     """Send booking details via Resend API with optional image attachment."""
 
-#     email_body = f"""
-#     Full Name: {data.full_name}
-#     Email Address: {data.email_address}
-#     Age: {data.age}
-#     Gender: {data.gender}
-#     Contact Number: {data.contact_number}
-#     Whatsapp Number: {data.whatsapp_number}
-#     College Name: {data.college_name}
-#     Pick-up Location: {data.pick_up_loc}
-#     Drop Location: {data.drop_loc}
-#     Meal Preference: {data.meal_preference}
-#     Experience Level: {data.trip_exp_level}
-#     Medical Details: {data.medical_details}
-#     Agree to Terms: {data.agree}
-#     """
-
-#     attachments = []
-
-#     # ✅ Attach local file as Base64 (no 'path' key)
-#     if image_path and os.path.exists(image_path):
-#         with open(image_path, "rb") as f:
-#             file_data = base64.b64encode(f.read()).decode("utf-8")
-#             file_name = os.path.basename(image_path)
-#             attachments.append({
-#                 "content": file_data,
-#                 "filename": file_name,
-#                 "type": "image/jpeg" if image_path.lower().endswith((".jpg", ".jpeg")) else "image/png"
-#             })
-
-#     email = {
-#         "from":  "Tirth Ghumo <onboarding@resend.dev>",
-#         "to": ["tirthghumo@gmail.com"],
-#         "subject": "New Trekking Package Booking",
-#         "text": email_body.strip(),
-#     }
-
-#     # Only add attachments if present
-#     if attachments:
-#         email["attachments"] = attachments
-
-#     try:
-#         resend.Emails.send(email)
-#         return {"status": "Email sent successfully"}
-#     except Exception as e:
-#         raise Exception(f"Email sending failed: {str(e)}")
 
 async def send_booking_email(data, image_path: str | None = None):
     admin_action_base = "https://tgbackend-production-62ff.up.railway.app/odt/confirm"  # Base URL for admin actions
-
+    print(admin_action_base)
     button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
     button_939 = f"{admin_action_base}?booking_id={data.id}&amount=939"
 
@@ -115,15 +68,12 @@ async def send_booking_email(data, image_path: str | None = None):
     if attachments:
         email["attachments"] = attachments
 
-    try:
+   
         resend.Emails.send(email)
-        return {"status": "Email sent successfully"}
-    except Exception as e:
-        raise Exception(f"Email sending failed: {str(e)}")
+        
+    # except Exception as e:
+    #     raise Exception(f"Email sending failed: {str(e)}")
 
-# =====================================================================
-# 2️⃣ SEND INVOICE EMAIL TO USER
-# =====================================================================
 
 
 async def send_email_with_invoice(data, invoice_path):
