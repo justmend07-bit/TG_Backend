@@ -85,20 +85,20 @@ async def send_booking_email(data, image_path: str | None = None):
         decline_link = f"https://tgbackend-production-62ff.up.railway.app/odt/decline?booking_id={data.id}"
 
         safe_text = f"""
-            A new trekking booking has been submitted.
+        A new trekking booking has been submitted.
 
-            Student Details:
-            Name: {data.full_name}
-            Email: {data.email_address}
-            Contact: {data.contact_number}
-            College: {data.college_name}
+        Student Details:
+        Name: {data.full_name}
+        Email: {data.email_address}
+        Contact: {data.contact_number}
+        College: {data.college_name}
 
-            Package Review Links:
-            • Review package option (739): {button_739}
-            • Review package option (939): {button_939}
-            Decline booking: {decline_link}
+        Package Review Links:
+        • Review package option (739): {button_739}
+        • Review package option (939): {button_939}
+        Decline booking: {decline_link}
 
-            
+        
             """
 
         attachments = []
@@ -140,18 +140,18 @@ async def send_booking_email(data, image_path: str | None = None):
 async def send_booking_declined_email(data):
     try:
         text_body = f"""
-            Hello {data.full_name},
+        Hello {data.full_name},
 
-            Your trek booking could not be confirmed because your payment has not been received yet.
+        Your trek booking could not be confirmed because your payment has not been received yet.
 
-            If you have already paid, please contact us immediately at:
-            +91 6204289831
+        If you have already paid, please contact us immediately at:
+        +91 6204289831
 
-            We will verify and update your booking status.
+        We will verify and update your booking status.
 
-            Regards,
-            Team Tirth Ghumo
-            """.strip()
+        Regards,
+        Team Tirth Ghumo
+        """.strip()
 
         email_payload = {
             "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
