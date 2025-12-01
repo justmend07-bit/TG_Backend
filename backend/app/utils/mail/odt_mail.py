@@ -19,37 +19,90 @@ resend.api_key = settings.resend_api_key
 base_url = settings.base_url
 
 
+# async def send_booking_email(data, image_path: str | None = None):
+#     try:
+#         admin_action_base = "https://tgbackend-production-62ff.up.railway.app/odt/confirm"  # Base URL for admin actions
+#         print(admin_action_base)
+#         button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
+#         button_939 = f"{admin_action_base}?booking_id={data.id}&amount=939"
+    
+#         html_body = f"""
+#         <h3>New Booking Received</h3>
+#         <p><b>Name:</b> {data.full_name}</p>
+#         <p><b>Email:</b> {data.email_address}</p>
+#         <p><b>Contact:</b> {data.contact_number}</p>
+#         <p><b>College:</b> {data.college_name}</p>
+    
+#         <p><b>Select Package Amount:</b></p>
+    
+#         <a href="{button_739}" 
+#            style="padding:10px 20px;background:#008CBA;color:white;text-decoration:none;border-radius:6px;">
+#            Approve ₹739
+#         </a>
+    
+#         <a href="{button_939}" 
+#            style="padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:6px;margin-left:10px;">
+#            Approve ₹939
+#         </a>
+#         """
+    
+#         attachments = []
+    
+#         # ✅ Attach local file as Base64 (no 'path' key)
+#         if image_path and os.path.exists(image_path):
+#             with open(image_path, "rb") as f:
+#                 file_data = base64.b64encode(f.read()).decode("utf-8")
+#                 file_name = os.path.basename(image_path)
+#                 attachments.append({
+#                     "content": file_data,
+#                     "filename": file_name,
+#                     "type": "image/jpeg" if image_path.lower().endswith((".jpg", ".jpeg")) else "image/png"
+#                 })
+    
+#         email = {
+#             "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
+#             "to": ["tirthghumo@gmail.com"],
+#             "subject": "New Trekking Package Booking",
+#             "html": html_body,
+#         }
+#         if attachments:
+#             email["attachments"] = attachments
+    
+       
+#         response = await resend.Emails.send(email_payload)
+#             print("EMAIL SENT SUCCESSFULLY:", response)
+    
+#     except Exception as e:
+#             print("EMAIL ERROR:", e)
+#             raise
 
 async def send_booking_email(data, image_path: str | None = None):
     try:
-        admin_action_base = "https://tgbackend-production-62ff.up.railway.app/odt/confirm"  # Base URL for admin actions
-        print(admin_action_base)
+        admin_action_base = "https://tgbackend-production-62ff.up.railway.app/odt/confirm"
+        
         button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
         button_939 = f"{admin_action_base}?booking_id={data.id}&amount=939"
-    
+
         html_body = f"""
         <h3>New Booking Received</h3>
         <p><b>Name:</b> {data.full_name}</p>
         <p><b>Email:</b> {data.email_address}</p>
         <p><b>Contact:</b> {data.contact_number}</p>
         <p><b>College:</b> {data.college_name}</p>
-    
+
         <p><b>Select Package Amount:</b></p>
-    
+
         <a href="{button_739}" 
-           style="padding:10px 20px;background:#008CBA;color:white;text-decoration:none;border-radius:6px;">
-           Approve ₹739
-        </a>
-    
+        style="padding:10px 20px;background:#008CBA;color:white;text-decoration:none;border-radius:6px;">
+        Approve ₹739</a>
+
         <a href="{button_939}" 
-           style="padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:6px;margin-left:10px;">
-           Approve ₹939
-        </a>
+        style="padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:6px;margin-left:10px;">
+        Approve ₹939</a>
         """
-    
+
         attachments = []
-    
-        # ✅ Attach local file as Base64 (no 'path' key)
+
         if image_path and os.path.exists(image_path):
             with open(image_path, "rb") as f:
                 file_data = base64.b64encode(f.read()).decode("utf-8")
@@ -59,23 +112,24 @@ async def send_booking_email(data, image_path: str | None = None):
                     "filename": file_name,
                     "type": "image/jpeg" if image_path.lower().endswith((".jpg", ".jpeg")) else "image/png"
                 })
-    
-        email = {
+
+        email_payload = {
             "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
             "to": ["tirthghumo@gmail.com"],
             "subject": "New Trekking Package Booking",
             "html": html_body,
         }
+
         if attachments:
-            email["attachments"] = attachments
-    
-       
+            email_payload["attachments"] = attachments
+
         response = await resend.Emails.send(email_payload)
-            print("EMAIL SENT SUCCESSFULLY:", response)
-    
+        print("EMAIL SENT SUCCESSFULLY:", response)
+
     except Exception as e:
-            print("EMAIL ERROR:", e)
-            raise
+        print("EMAIL ERROR:", e)
+        raise
+
 
 
 
