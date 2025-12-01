@@ -83,23 +83,21 @@ async def send_booking_email(data, image_path: str | None = None):
         button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
         button_939 = f"{admin_action_base}?booking_id={data.id}&amount=939"
 
-        html_body = f"""
-        <h3>New Booking Received</h3>
-        <p><b>Name:</b> {data.full_name}</p>
-        <p><b>Email:</b> {data.email_address}</p>
-        <p><b>Contact:</b> {data.contact_number}</p>
-        <p><b>College:</b> {data.college_name}</p>
+        safe_text = f"""
+            A new trekking booking has been submitted.
 
-        <p><b>Select Package Amount:</b></p>
+            Student Details:
+            Name: {data.full_name}
+            Email: {data.email_address}
+            Contact: {data.contact_number}
+            College: {data.college_name}
 
-        <a href="{button_739}" 
-        style="padding:10px 20px;background:#008CBA;color:white;text-decoration:none;border-radius:6px;">
-        Approve ₹739</a>
+            Package Review Links:
+            • Review package option (739): {button_739}
+            • Review package option (939): {button_939}
 
-        <a href="{button_939}" 
-        style="padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:6px;margin-left:10px;">
-        Approve ₹939</a>
-        """
+            
+            """
 
         attachments = []
 
@@ -120,22 +118,11 @@ async def send_booking_email(data, image_path: str | None = None):
         #     "html": html_body,
         # }
         email_payload = {
-    "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
-    "to": ["thekomal2502@gmail.com"],
-    "subject": "New Trekking Package Booking",
-    "html": html_body,
-    "text": f"""
-        New Booking Received
-        
-        Name: {data.full_name}
-        Email: {data.email_address}
-        Contact: {data.contact_number}
-        College: {data.college_name}
-        
-        Approve link 739: {button_739}
-        Approve link 939: {button_939}
-            """
-        }
+            "from": "Tirth Ghumo <onboarding@resend.dev>",
+            "to": ["tirthghumo@gmail.com"],
+            "subject": "New Trekking Package Booking",
+            "text": safe_text.strip(),
+                }
 
 
         if attachments:
