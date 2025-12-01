@@ -180,7 +180,7 @@ async def send_email_with_invoice(data, invoice_path):
 
     # ---- Email Body ----
     email_body = f"""
-   Hey {name} 🌿
+   Hey {data.full_name} 🌿
 
 Great news — your booking for the 1Day Mrignnath Trek with TirthGhumo 
 is confirmed for 7th December 2025!
