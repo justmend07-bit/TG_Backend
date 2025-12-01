@@ -123,7 +123,7 @@ async def send_booking_email(data, image_path: str | None = None):
         if attachments:
             email_payload["attachments"] = attachments
 
-        response = await resend.Emails.send(email_payload)
+        response = resend.Emails.send(email_payload)
         print("EMAIL SENT SUCCESSFULLY:", response)
 
     except Exception as e:
