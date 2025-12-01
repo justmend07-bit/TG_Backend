@@ -138,17 +138,21 @@ async def send_booking_email(data, image_path: str | None = None):
 async def send_booking_declined_email(data):
     try:
         text_body = f"""
-        Hello {data.full_name},
-        
-        Your trek booking could not be confirmed because your payment has not been received yet.
-        
-        If you have already paid, please contact us immediately at:
-        +91 6204289831
-        
-        We will verify and update your booking status.
-        
-        Regards,
-        Team Tirth Ghumo
+        Hey {data.full_name},
+
+Thank you for choosing TirthGhumo for your adventure.
+We wanted to let you know that we've reviewed your recent booking attempt.
+Unfortunately, we couldn’t verify the payment details on our end.
+
+This might be due to a mismatch in the transaction ID or some other discrepancy.
+
+If you believe this is an error, please feel free to reach out to us at
+6260499299 / 6204289831 — we’ll be happy to help resolve the issue.
+
+We appreciate your understanding and hope to welcome you on another adventure soon.
+
+Warm regards,
+Team TirthGhumo
         """.strip()
 
         email_payload = {
@@ -176,13 +180,29 @@ async def send_email_with_invoice(data, invoice_path):
 
     # ---- Email Body ----
     email_body = f"""
-    Hi {data.full_name},
-    
-    Thank you for booking your trek with Tirth Ghumo!
-    Your invoice is attached with this email.
-    
-    Regards,
-    Team Tirth Ghumo
+   Hey {name} 🌿
+
+Great news — your booking for the 1Day Mrignnath Trek with TirthGhumo 
+is confirmed for 7th December 2025!
+
+Your payment has been approved successfully on {dateTime}.
+
+All essential trip details, including timings and instructions, 
+will be shared shortly on WhatsApp.
+
+Please make sure you’ve requested to join the WhatsApp group,
+as all updates will be shared there.
+
+If you need any help or have questions, feel free to contact us 
+at 6260499299 / 6204289831.
+
+Get ready for an exciting adventure and a day full of unforgettable memories!
+
+Warm regards,
+Team TirthGhumo
+
+Thank you for choosing TirthGhumo — Aastha Bhi, Suvidha Bhi 🌄
+
     """
 
     # ---- Email Payload ----
