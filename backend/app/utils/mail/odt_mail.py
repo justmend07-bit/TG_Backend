@@ -139,10 +139,14 @@ async def send_booking_declined_email(data):
     try:
         text_body = f"""
         Hello {data.full_name},
+        
         Your trek booking could not be confirmed because your payment has not been received yet.
+        
         If you have already paid, please contact us immediately at:
         +91 6204289831
+        
         We will verify and update your booking status.
+        
         Regards,
         Team Tirth Ghumo
         """.strip()
@@ -173,8 +177,10 @@ async def send_email_with_invoice(data, invoice_path):
     # ---- Email Body ----
     email_body = f"""
     Hi {data.full_name},
+    
     Thank you for booking your trek with Tirth Ghumo!
     Your invoice is attached with this email.
+    
     Regards,
     Team Tirth Ghumo
     """
