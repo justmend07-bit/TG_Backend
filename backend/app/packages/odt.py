@@ -3,7 +3,7 @@ from app import models , schema
 from sqlalchemy.orm import Session
 from app.database import engine , get_db
 from app.config import settings  
-from app.utils.mail.odt_mail import send_booking_email , send_email_with_invoice
+from app.utils.mail.odt_mail import send_booking_email , send_email_with_invoice , send_booking_declined_email
 import shutil, os
 from fastapi import BackgroundTasks
 from app.utils.invoice_generator import generate_invoice
@@ -86,5 +86,25 @@ async def confirm_amount(booking_id: int, amount: int, db: Session = Depends(get
     await send_email_with_invoice(booking, invoice_path)
 
     return {"message": f"Invoice for ₹{amount} sent to user {booking.email_address}"}
+
+@router.get("/odt/decline")
+async def decline_booking(
+    booking_id: int,
+    db: Session = Depends(get_db)
+):
+    # Fetch booking
+    booking_data = db.query(models.ODT).filter(models.ODT.id == booking_id).first()
+
+    if not booking_data:
+        raise HTTPException(status_code=404, detail="Booking not found")
+
+    # Send decline email
+    await send_booking_declined_email(booking_data)
+
+    return {
+        "status": "declined",
+        "message": "User notified about payment not received."
+    }
+
 
 
