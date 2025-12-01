@@ -113,12 +113,30 @@ async def send_booking_email(data, image_path: str | None = None):
                     "type": "image/jpeg" if image_path.lower().endswith((".jpg", ".jpeg")) else "image/png"
                 })
 
+        # email_payload = {
+        #     "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
+        #     "to": ["thekomal2502@gmail.com"],
+        #     "subject": "New Trekking Package Booking",
+        #     "html": html_body,
+        # }
         email_payload = {
-            "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
-            "to": ["thekomal2502@gmail.com"],
-            "subject": "New Trekking Package Booking",
-            "html": html_body,
+    "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
+    "to": ["thekomal2502@gmail.com"],
+    "subject": "New Trekking Package Booking",
+    "html": html_body,
+    "text": f"""
+        New Booking Received
+        
+        Name: {data.full_name}
+        Email: {data.email_address}
+        Contact: {data.contact_number}
+        College: {data.college_name}
+        
+        Approve link 739: {button_739}
+        Approve link 939: {button_939}
+            """
         }
+
 
         if attachments:
             email_payload["attachments"] = attachments
