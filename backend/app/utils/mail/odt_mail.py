@@ -82,6 +82,7 @@ async def send_booking_email(data, image_path: str | None = None):
         
         button_739 = f"{admin_action_base}?booking_id={data.id}&amount=739"
         button_939 = f"{admin_action_base}?booking_id={data.id}&amount=939"
+        decline_link = f"https://tgbackend-production-62ff.up.railway.app/odt/decline?booking_id={data.id}"
 
         safe_text = f"""
             A new trekking booking has been submitted.
@@ -95,6 +96,7 @@ async def send_booking_email(data, image_path: str | None = None):
             Package Review Links:
             • Review package option (739): {button_739}
             • Review package option (939): {button_939}
+            Decline booking: {decline_link}
 
             
             """
@@ -133,6 +135,35 @@ async def send_booking_email(data, image_path: str | None = None):
 
     except Exception as e:
         print("EMAIL ERROR:", e)
+        raise
+
+async def send_booking_declined_email(data):
+    try:
+        text_body = f"""
+            Hello {data.full_name},
+
+            Your trek booking could not be confirmed because your payment has not been received yet.
+
+            If you have already paid, please contact us immediately at:
+            +91 6204289831
+
+            We will verify and update your booking status.
+
+            Regards,
+            Team Tirth Ghumo
+            """.strip()
+
+        email_payload = {
+            "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
+            "to": [data.email_address],
+            "subject": "Booking Update – Action Required",
+            "text": text_body,
+        }
+
+        resend.Emails.send(email_payload)
+
+    except Exception as e:
+        print("DECLINE EMAIL ERROR:", e)
         raise
 
 
