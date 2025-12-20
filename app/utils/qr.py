@@ -39,22 +39,12 @@ def generate_payment_qr(amount: int) -> str:
 
 @router.post("/vr-darshan/price")
 async def calculate_vr_darshan_price(
-    devotees: str = Form(...),
+    persons: int,
 ):
 
-    try:
-        devotees_data = json.loads(devotees)
-    except Exception:
-        raise HTTPException(400, "Invalid devotees format")
+    PRICE_PER_SENIOR = 39
 
-    SENIOR_AGE = 60
-    PRICE_PER_SENIOR = 100
-
-    senior_count = sum(
-        1 for d in devotees_data if int(d["age"]) >= SENIOR_AGE
-    )
-
-    amount = senior_count * PRICE_PER_SENIOR
+    amount = person * PRICE_PER_SENIOR
 
     qr_url = None
     session_id = None
@@ -65,10 +55,7 @@ async def calculate_vr_darshan_price(
         session_id = str(uuid.uuid4())
 
     return {
-        "senior_count": senior_count,
-        "amount": amount,
         "payment_qr_url": qr_url,
-        "payment_session_id": session_id
     }
 
 

@@ -38,8 +38,8 @@ async def send_booking_email_manali(data, image_path: str | None = None):
             })
 
     email = {
-        "from":  "Tirth Ghumo <onboarding@resend.dev>",
-        "to": ["tirthghumo@gmail.com"],
+        "from":  "Tirth Ghumo <no-reply@tirthghumo.in>",
+        "to": ["ceo.tirthghumo@gmail.com"],
         "subject": "New Booking for Manali",
         "text": email_body.strip(),
     }

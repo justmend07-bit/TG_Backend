@@ -33,8 +33,8 @@ async def send_enquiry_email(data):
     """
 
     email = {
-        "from": "Tirth Ghumo <onboarding@resend.dev>",
-        "to": ["tirthghumo@gmail.com"],
+        "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
+        "to": ["ceo.tirthghumo@gmail.com"],
         "subject": "New Travel Enquiry Received",
         "text": email_body.strip(),
     }
