@@ -39,12 +39,12 @@ def generate_payment_qr(amount: int) -> str:
 
 @router.post("/vr-darshan/price")
 async def calculate_vr_darshan_price(
-    persons: int,
+    number_of_persons: int,
 ):
 
     PRICE_PER_SENIOR = 39
 
-    amount = person * PRICE_PER_SENIOR
+    amount = number_of_persons * PRICE_PER_SENIOR
 
     qr_url = None
     session_id = None
