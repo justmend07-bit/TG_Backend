@@ -37,7 +37,7 @@ def generate_payment_qr(amount: int) -> str:
 
     
 
-@router.post("/vr-darshan/price")
+@router.get("/vr-darshan/price")
 async def calculate_vr_darshan_price(
     number_of_persons: int,
 ):
