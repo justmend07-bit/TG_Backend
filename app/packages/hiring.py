@@ -56,13 +56,12 @@ async def apply_for_hiring(
     full_name: str = Form(...),
     email_address: str = Form(...),
     phone_number: str = Form(...),
-    date_of_birth: date = Form(...),
     gender: str = Form(None),
     current_city: str = Form(...),
 
     education_qualification: str = Form(None),
     college_name: str = Form(None),
-    school_name: str = Form(None),
+    
 
     # -------- Position --------
     position_applied: str = Form(...),
@@ -88,9 +87,9 @@ async def apply_for_hiring(
     work_proof_link: str = Form(None),  # JSON list
 
     # -------- Files --------
-    resume_file: UploadFile = File(...),
+    resume_file: UploadFile | None = File(None),
     id_proof_type: str = Form(...),
-    id_proof_file: UploadFile = File(...),
+    id_proof_file: UploadFile | None = File(None),
 
     db: Session = Depends(get_db)
 ):
@@ -110,20 +109,24 @@ async def apply_for_hiring(
         raise HTTPException(400, "At least one skill is required")
 
     # ---------------- FILE UPLOADS ----------------
-    resume_url = upload_to_supabase(resume_file, folder="resumes")
-    id_proof_url = upload_to_supabase(id_proof_file, folder="id_proofs")
+    resume_url = None
+    id_proof_url = None
+
+    if resume_file:
+        resume_url = upload_to_supabase(resume_file, folder="resumes")
+
+    if id_proof_file:
+        id_proof_url = upload_to_supabase(id_proof_file, folder="id_proofs")
 
     # ---------------- DB INSERT ----------------
     application = models.HiringApplication(
         full_name=full_name,
         email_address=email_address,
         phone_number=phone_number,
-        date_of_birth=date_of_birth,
         gender=gender,
         current_city=current_city,
         education_qualification=education_qualification,
         college_name=college_name,
-        school_name=school_name,
         position_applied=position_applied,
         why_this_role=why_this_role,
         worked_in_travel_company=worked_in_travel_company,

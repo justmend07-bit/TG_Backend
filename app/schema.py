@@ -131,14 +131,13 @@ class HiringApplicationCreateSchema(BaseModel):
     email_address: EmailStr
     phone_number: str = Field(..., min_length=10, max_length=15)
 
-    date_of_birth: date
+    
     gender: Optional[str] = Field(None, max_length=20)
     current_city: str = Field(..., max_length=100)
 
     education_qualification: Optional[str] = Field(None, max_length=100)
     college_name: Optional[str] = Field(None, max_length=150)
-    school_name: Optional[str] = Field(None, max_length=150)
-
+    
     # ---------------- Position ----------------
     position_applied: str = Field(..., max_length=100)
     why_this_role: str = Field(..., min_length=20, max_length=2000)

@@ -165,13 +165,13 @@ class HiringApplication(Base):
     email_address = Column(String(255), nullable=False, index=True)
     phone_number = Column(String(15), nullable=False)
 
-    date_of_birth = Column(Date, nullable=False)
+    
     gender = Column(String(20))
     current_city = Column(String(100), nullable=False)
 
     education_qualification = Column(String(100))
     college_name = Column(String(150))
-    school_name = Column(String(150))
+    
 
     position_applied = Column(String(100), nullable=False)
     why_this_role = Column(Text, nullable=False)

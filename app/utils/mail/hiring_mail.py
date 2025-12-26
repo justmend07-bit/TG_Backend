@@ -15,7 +15,6 @@ async def send_hiring_email(data):
     Email Address    : {data.email_address}
     Contact Number   : {data.phone_number}
     City             : {data.current_city}
-    Date of Birth    : {data.date_of_birth}
     Gender           : {data.gender or "N/A"}
 
     -------------------------
@@ -23,7 +22,6 @@ async def send_hiring_email(data):
     -------------------------
     Qualification    : {data.education_qualification or "N/A"}
     College Name     : {data.college_name or "N/A"}
-    School Name      : {data.school_name or "N/A"}
 
     -------------------------
     POSITION DETAILS
