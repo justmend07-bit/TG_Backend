@@ -113,12 +113,11 @@ async def apply_for_hiring(
     resume_url = None
     id_proof_url = None
 
-    if resume_file.filename != "":
-        resume_url = upload_to_supabase(resume_file, folder="resumes")
+    if resume_file and resume_file.filename and resume_file.size > 0:
+    resume_url = upload_to_supabase(resume_file, folder="resumes")
 
-    if id_proof_file.filename != "":
+    if id_proof_file and id_proof_file.filename and id_proof_file.size > 0:
         id_proof_url = upload_to_supabase(id_proof_file, folder="id_proofs")
-
     # ---------------- DB INSERT ----------------
     application = models.HiringApplication(
         full_name=full_name,
