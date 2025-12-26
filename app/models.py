@@ -176,7 +176,7 @@ class HiringApplication(Base):
     position_applied = Column(String(100), nullable=False)
     why_this_role = Column(Text, nullable=False)
 
-    resume_file = Column(Text, nullable=False)
+    resume_file = Column(Text)
 
     key_skills = Column(Text, nullable=False)
 

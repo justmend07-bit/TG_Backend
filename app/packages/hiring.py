@@ -109,13 +109,14 @@ async def apply_for_hiring(
         raise HTTPException(400, "At least one skill is required")
 
     # ---------------- FILE UPLOADS ----------------
+    print(resume_file, id_proof_file)
     resume_url = None
     id_proof_url = None
 
-    if resume_file:
+    if resume_file.filename != "":
         resume_url = upload_to_supabase(resume_file, folder="resumes")
 
-    if id_proof_file:
+    if id_proof_file.filename != "":
         id_proof_url = upload_to_supabase(id_proof_file, folder="id_proofs")
 
     # ---------------- DB INSERT ----------------
