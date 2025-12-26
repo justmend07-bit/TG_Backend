@@ -176,7 +176,7 @@ class HiringApplication(Base):
     position_applied = Column(String(100), nullable=False)
     why_this_role = Column(Text, nullable=False)
 
-    resume_file = Column(Text)
+    resume_file = Column(Text , nullable=True)
 
     key_skills = Column(Text, nullable=False)
 
@@ -195,8 +195,8 @@ class HiringApplication(Base):
     comfortable_24x7 = Column(Boolean)
 
     # ---------------- Identity ----------------
-    id_proof_type = Column(String(50))
-    id_proof_file = Column(Text)
+    id_proof_type = Column(String(50) , nullable=True)
+    id_proof_file = Column(Text , nullable=True)
 
     linkedin_profile = Column(Text)
     portfolio_url = Column(Text)
