@@ -114,7 +114,7 @@ async def apply_for_hiring(
     id_proof_url = None
 
     if resume_file and resume_file.filename and resume_file.size > 0:
-    resume_url = upload_to_supabase(resume_file, folder="resumes")
+        resume_url = upload_to_supabase(resume_file, folder="resumes")
 
     if id_proof_file and id_proof_file.filename and id_proof_file.size > 0:
         id_proof_url = upload_to_supabase(id_proof_file, folder="id_proofs")
