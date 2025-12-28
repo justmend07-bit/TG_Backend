@@ -67,7 +67,7 @@ async def send_hiring_email(data):
 
     email = {
         "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
-        "to": ["ceo.tirthghumo@gmail.com"],
+        "to": ["hr.tirthghumo@gmail.com"],
         "subject": f"New Hiring Application – {data.position_applied}",
         "text": email_body.strip(),
     }

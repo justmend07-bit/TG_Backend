@@ -5,11 +5,9 @@ from app.database import engine , get_db
 from app.config import settings  
 from app.utils.mail.enquiry_mail import send_enquiry_email
 import shutil, os
-from fastapi import BackgroundTasks
+from fastapi import C
 from app.utils.invoice_generator import generate_invoice
 from datetime import date
-
-
 
 router = APIRouter()
 

@@ -62,7 +62,7 @@ Decline (Payment Not Received):
 
     resend.Emails.send({
         "from": "Tirth Ghumo <no-reply@tirthghumo.in>",
-        "to": ["ceo.tirthghumo@gmail.com"],
+        "to": ["hr.tirthghumo@gmail.com"],
         "subject": "VR Darshan Booking – Action Required",
         "text": body
     })
