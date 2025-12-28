@@ -3,7 +3,7 @@ from app import models , schema
 from sqlalchemy.orm import Session
 from app.database import engine , get_db
 from app.config import settings  
-from app.utils.email_utills import  send_booking_email_tamia
+from app.utils.mail.tamia import  send_booking_email_tamia
 import shutil, os
 from fastapi import BackgroundTasks
 
